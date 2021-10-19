@@ -23,6 +23,22 @@ class Receta(models.Model):
         return self.titulo
 
 
+class Ingrediente(models.Model):
+    id = models.AutoField(primary_key=True)
+    nombre = models.CharField('Titulo del ingrediente', max_length=225, null=False, blank=False)
+    descripcion = models.CharField('Descripcion del ingrediente', max_length=500, null=False, blank=False)
+    zonaOrigen = models.CharField('Luegar de origen', max_length=225, null=False, blank=False)
+    clasificacion = models.CharField('Clasificacion', max_length=100, null=True, blank=True)
+    apodos = models.CharField('Apodos', max_length=225, null=False, blank=False)
+
+    class Meta:
+        verbose_name = 'Ingrediente'
+        verbose_name_plural = 'Ingredientes'
+
+    def __str__(self):
+        return self.nombre
+
+
 class Usuario(models.Model):
     id = models.AutoField(primary_key=True)
     nombre = models.CharField('Nombre del Usuario', max_length=225, null=False, blank=False)
