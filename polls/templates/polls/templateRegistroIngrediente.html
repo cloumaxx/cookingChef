@@ -1,10 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Registro Ingrediente</title>
+  <meta charset="UTF-8">
+  <title>Registro Ingrediente</title>
 </head>
 <body>
-<p>hola</p>
+   <div class="container">
+     <div class="login-container">
+       <div class="register">
+         <h2>Bienvendo al Registro de un ingrediente</h2>
+          <form method="post">
+           {% csrf_token %}
+            <!--  {{form.as_p}}-->
+           <span>¿Cual es el id del ingrediente?</span>{{form.idIngrediente}}<br><br>
+           <span>¿Como se llama el ingrediente?</span>{{form.nombre}}<br><br>
+           <span>¿Cual es su descripción?</span>  {{form.descripcion}}<br><br>
+           <span>¿De donde viene?</span>  {{form.zonaOrigen}} <br><br>
+           <span>¿Como la clasificarias?</span>  {{form.clasificacion}}<br><br>
+           <input type="submit" class="submit" value="CREAR INGREDIENTE">
+         </form>
+       </div>
+
+     </div>
+   </div>
 </body>
 </html>
+

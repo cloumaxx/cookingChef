@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template import loader
 
-from .forms import UsuarioForm
+from .forms import UsuarioForm, IngredienteForm, RecetaForm
 from .models import Question, Receta, Ingrediente, Usuario
 
 
@@ -25,7 +25,6 @@ def PantallaBusqueda(request):
 
 
 def pantallaRegistroUsuario(request):
-
     if request.method == 'POST':
         form = UsuarioForm(request.POST)
         if form.is_valid():
@@ -37,26 +36,30 @@ def pantallaRegistroUsuario(request):
     return HttpResponse(template.render(context, request))
 
 
-def pantallaRegistroReceta(request):
-    vistaBusqueda = Receta.objects.order_by('-pub_date')[:5]
-
-    template = loader.get_template('polls/templateRegistroReceta.html')
-    context = {
-        'lista': vistaBusqueda,
-    }
-    return HttpResponse(template.render(context, request))
-
-
 def PantallaRegistroIngrediente(request):
     if request.method == 'POST':
-        form = UsuarioForm(request.POST)
+        form = IngredienteForm(request.POST)
         if form.is_valid():
             form.save()
         return redirect('Pantalla Principal')
     else:
-        form = UsuarioForm()
+        form = IngredienteForm()
     return render(request, 'polls/templateRegistroIngrediente.html', {'form': form})
     return HttpResponse(template.render(context, request))
+
+
+
+def pantallaRegistroReceta(request):
+    if request.method == 'POST':
+        form = RecetaForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('Pantalla Principal')
+    else:
+        form = RecetaForm()
+    return render(request, 'polls/templateRegistroReceta.html', {'form': form})
+    return HttpResponse(template.render(context, request))
+
 
 def PantallaUsuario(request):
     return HttpResponse("esta pantalla se encargara de mostrar el perfil de un usuario")

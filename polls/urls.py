@@ -11,6 +11,6 @@ urlpatterns = [
     path('PantallaBusqueda/', views.PantallaBusqueda, name='PantallaBusqueda'),
     path('pantallaRegistroReceta/', views.pantallaRegistroReceta, name='pantallaRegistroReceta'),
     path('pantallaRegistroUsuario/', views.pantallaRegistroUsuario, name='pantallaRegistroUsuario'),
-    path('pantallaRegistroIngrediente/', views.PantallaRegistroIngrediente, name='PantallaRegistroIngrediente')
+    path('PantallaRegistroIngrediente/', views.PantallaRegistroIngrediente, name='PantallaRegistroIngrediente')
 
 ]

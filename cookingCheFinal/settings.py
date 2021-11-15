@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'cookingCheFinal.wsgi.application'
 DATABASES = {
     'default': {
          'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'BaseDatosFinalCooking',
+        'NAME': 'BaseDatosFinalCooking2',
         'USER': 'postgres',
         'PASSWORD': 'cealvearm70033',
         'HOST': '127.0.0.1',
