@@ -7,11 +7,6 @@ from django.forms import forms
 from django.utils import timezone
 
 
-class Question(models.Model):
-    question_text = models.CharField(max_length=200)
-    pub_date = models.DateTimeField('date published')
-
-
 class Comentarios(models.Model):
     idComentario = models.AutoField(primary_key=True)
     auto = models.CharField('Autor del comentario', max_length=100, null=False, blank=False)
@@ -44,7 +39,7 @@ def calcularCodigoIngre():
 
 
 class Ingrediente(models.Model):
-    aux = str(calcularCodigoIngre())
+    aux =str(calcularCodigoIngre())
     CodigoReceta = [(aux, aux)]
     tipoComida = [('Lacteo', 'Lacteo'),
                   ('Cereales', 'Cereales'),

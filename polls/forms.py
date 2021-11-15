@@ -26,7 +26,7 @@ class IngredienteForm(forms.ModelForm):
             'nombre': forms.TextInput(attrs={'class': 'form-control'}),
             'descripcion': forms.TextInput(attrs={'class': 'form-control'}),
             'zonaOrigen': forms.TextInput(attrs={'class': 'form-control'}),
-            'clasificacion': forms.NumberInput(attrs={'class': 'form-control'})
+            'clasificacion': forms.Select(attrs={'class': 'form-control'})
         }
 
 

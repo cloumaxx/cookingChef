@@ -3,23 +3,20 @@ from django.shortcuts import redirect, render
 from django.template import loader
 
 from .forms import UsuarioForm, IngredienteForm, RecetaForm
-from .models import Question, Receta, Ingrediente, Usuario
+from .models import Receta, Ingrediente, Usuario
 
 
 def PantallaInicial(request):
-    latest_question_list = Question.objects.order_by('-pub_date')[:5]
     template = loader.get_template('polls/index.html')
     context = {
-        'lista': latest_question_list,
+
     }
     return HttpResponse(template.render(context, request))
 
 
 def PantallaBusqueda(request):
-    vistaBusqueda = Question.objects.order_by('-pub_date')[:5]
     template = loader.get_template('polls/templateBusqueda.html')
     context = {
-        'lista': vistaBusqueda,
     }
     return HttpResponse(template.render(context, request))
 
@@ -48,7 +45,6 @@ def PantallaRegistroIngrediente(request):
     return HttpResponse(template.render(context, request))
 
 
-
 def pantallaRegistroReceta(request):
     if request.method == 'POST':
         form = RecetaForm(request.POST)
@@ -67,4 +63,3 @@ def PantallaUsuario(request):
 
 def PantallaReceta(request):
     return HttpResponse("esta pantalla se encargara de mostrar la informacion referente a una receta")
-
