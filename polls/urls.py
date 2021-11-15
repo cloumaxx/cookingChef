@@ -1,5 +1,6 @@
 from django.urls import path
-
+from django.contrib import admin
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
@@ -10,4 +11,6 @@ urlpatterns = [
     path('PantallaBusqueda/', views.PantallaBusqueda, name='PantallaBusqueda'),
     path('pantallaRegistroReceta/', views.pantallaRegistroReceta, name='pantallaRegistroReceta'),
     path('pantallaRegistroUsuario/', views.pantallaRegistroUsuario, name='pantallaRegistroUsuario'),
+    path('pantallaRegistroIngrediente/', views.PantallaRegistroIngrediente, name='PantallaRegistroIngrediente')
+
 ]

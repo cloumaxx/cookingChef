@@ -1,9 +1,10 @@
 from django.db import models
+from django.db import connection
+
 import datetime
 
 from django.forms import forms
 from django.utils import timezone
-
 
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
@@ -55,9 +56,6 @@ class Ingrediente(models.Model):
     # }    return self.nombre
 
 
-from django.db import connection
-
-
 def calcularCodigoUsua():
     with connection.cursor() as cursor:
         cursor.execute('SELECT  MAX("idUsuario") \n FROM public.polls_usuario;')
@@ -69,14 +67,13 @@ def calcularCodigoUsua():
     return final
 
 
-
-
+# aux
 class Usuario(models.Model):
-    aux =str(calcularCodigoUsua())
+    aux = str(calcularCodigoUsua())
     CodigoUsuario = [(aux, aux)]
     print(aux)
 
-    idUsuario = models.CharField('Id del Usuario', max_length=10, null=False, choices=CodigoUsuario)
+    idUsuario = models.CharField('Id del Usuario', max_length=10, null=False,choices=CodigoUsuario)
     nombre = models.CharField('Nombre del Usuario', max_length=225, null=False, blank=False)
     apellido = models.CharField('Apellido del Usuario', max_length=225, null=False, blank=False)
     apodo = models.CharField('Apodo del Usuario', max_length=225, null=False, blank=False)

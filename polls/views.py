@@ -47,9 +47,21 @@ def pantallaRegistroReceta(request):
     return HttpResponse(template.render(context, request))
 
 
+def PantallaRegistroIngrediente(request):
+    if request.method == 'POST':
+        form = UsuarioForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('Pantalla Principal')
+    else:
+        form = UsuarioForm()
+    return render(request, 'polls/templateRegistroIngrediente.html', {'form': form})
+    return HttpResponse(template.render(context, request))
+
 def PantallaUsuario(request):
     return HttpResponse("esta pantalla se encargara de mostrar el perfil de un usuario")
 
 
 def PantallaReceta(request):
     return HttpResponse("esta pantalla se encargara de mostrar la informacion referente a una receta")
+
