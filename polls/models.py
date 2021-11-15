@@ -41,7 +41,7 @@ class Receta(models.Model):
 
 
 class Ingrediente(models.Model):
-    idIngrediente = models.AutoField(primary_key=True)
+    idIngrediente = models.CharField('Id del ingrendiente', max_length=225, null=False, blank=False)
     nombre = models.CharField('Titulo del ingrediente', max_length=225, null=False, blank=False)
     descripcion = models.CharField('Descripcion del ingrediente', max_length=500, null=False, blank=False)
     zonaOrigen = models.CharField('Luegar de origen', max_length=225, null=False, blank=False)
@@ -55,9 +55,28 @@ class Ingrediente(models.Model):
     # }    return self.nombre
 
 
-class Usuario(models.Model):
+from django.db import connection
 
-    idUsuario = models.CharField('Id del Usuario', max_length=10, null=False,blank=False)
+
+def calcularCodigoUsua():
+    with connection.cursor() as cursor:
+        cursor.execute('SELECT  MAX("idUsuario") \n FROM public.polls_usuario;')
+        row = cursor.fetchone()
+    aux = str(row)
+    num = int(aux[2])
+    final = num + 1
+
+    return final
+
+
+
+
+class Usuario(models.Model):
+    aux =str(calcularCodigoUsua())
+    CodigoUsuario = [(aux, aux)]
+    print(aux)
+
+    idUsuario = models.CharField('Id del Usuario', max_length=10, null=False, choices=CodigoUsuario)
     nombre = models.CharField('Nombre del Usuario', max_length=225, null=False, blank=False)
     apellido = models.CharField('Apellido del Usuario', max_length=225, null=False, blank=False)
     apodo = models.CharField('Apodo del Usuario', max_length=225, null=False, blank=False)
@@ -65,8 +84,9 @@ class Usuario(models.Model):
     cedula = models.CharField('Cedula del Usuario', max_length=30, null=False, blank=False)
     fechaNacido = models.DateField('Fecha nacimiento', auto_now=False, null=False, blank=False)
     email = models.EmailField('Correo del usuario:', null=False, blank=False)
-   # facebook = models.EmailField('Facebook del usuario:',max_length=100)
-   # whatsapp = models.IntegerField('Whatsap usuario:')
+
+    # facebook = models.EmailField('Facebook del usuario:',max_length=100)
+    # whatsapp = models.IntegerField('Whatsap usuario:')
 
     class Meta:
         verbose_name = 'Usuario'

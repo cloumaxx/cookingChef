@@ -4,17 +4,8 @@ from django.template import loader
 
 from .forms import UsuarioForm
 from .models import Question, Receta, Ingrediente, Usuario
-from django.db import connection
 
-def calcularCodigoUsua():
-    with connection.cursor() as cursor:
-        cursor.execute('SELECT  MAX("idUsuario") \n FROM public.polls_usuario;')
-        row = cursor.fetchone()
-    aux = str(row)
-    num = int(aux[2])
-    final = num + 1
 
-    return final
 def PantallaInicial(request):
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
     template = loader.get_template('polls/index.html')

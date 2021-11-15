@@ -28,8 +28,7 @@ class UsuarioForm(forms.ModelForm):
         }
 
         widgets = {
-            'idUsuario': forms.TextInput(attrs={'class': 'form-control',
-                                                'placeholder': 'Ingresa el id'}),
+            'idUsuario': forms.Select(attrs={'class': 'form-control'}),
             'nombre': forms.TextInput(attrs={'class': 'form-control',
                                              'placeholder': 'Ingresa tú nombre'}),
             'apellido': forms.TextInput(attrs={'class': 'form-control',
