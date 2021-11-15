@@ -9,8 +9,11 @@
      <div class="login-container">
        <div class="register">
          <h2>Bienvendo al Registro</h2>
-         <form action="">
-           <span>¿Cual es tu nombre?</span>  <input type="text" placeholder="Ingresa tú nombre" class="nombre"><br><br>
+         <form method="post">
+           {% csrf_token%}
+           {{form.as_p}}
+            {{form.nombre}}
+           <span>***¿Cual es tu nombre?</span>  <input type="text" placeholder="Ingresa tú nombre" class="nombre"><br><br>
            <span>¿Cual es tu apellido?</span>  <input type="text" placeholder="Ingresa tú apellido" class="apellido"><br><br>
            <span>¿Tienes algun apodo?</span>  <input type="text" placeholder="Escribe o crea tu apodo" class="nickname"><br><br>
            <span>¿Cual es tu cedula?</span>  <input type="text" placeholder="Escribe tú cedula" class="cedula"><br><br>
