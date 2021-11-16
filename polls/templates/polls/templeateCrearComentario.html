@@ -6,21 +6,21 @@
   <meta charset="UTF-8">
   <title>Registro de comentario</title>
 </head>
-<body {>
+<body >
 
    <div class="container">
      <div class="login-container">
        <div class="register">
-         <h2>¿Que deseas decir?</h2>
-         <form method="post">
+         <h2 style="text-align:center; margin: 0 auto;">¿Que deseas decir?</h2>
+         <form method="post" style="text-align:center; margin: 0 auto;">
            {% csrf_token %}
-
-           <span>¿Cual es el id del comentario?</span>{{form.idComentarioAux}}<br><br>
+          <br><br>
+           <span>¿Cual es el id del comentario?</span>{{form.idComentario}}<br><br>
            <span>¿Como te llamas?</span> {{form.auto}}<br><br>
            <span>¿Que deseas decir?</span>  <br><br>{{form.contenido}}<br><br>
            <span>¿Para quien es el comentario?</span>  {{form.idDestino}}<br><br>
            <span>¿Cuando ocurrio?</span>  {{form.fechaCreacion}}<br><br>
-           <input type="submit" class="submit" value="CREAR RECETA">
+           <input type="submit" class="submit" value="CREAR COMENTARIO">
          </form>
        </div>
 

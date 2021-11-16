@@ -11,17 +11,17 @@
    <div class="container">
      <div class="login-container">
        <div class="register">
-         <h2>Bienvendo al Registro de la receta</h2>
-         <form method="post">
+         <h2 style="text-align:center; margin: 0 auto;">Bienvendo al Registro de la receta</h2>
+         <form method="post" style="text-align:center; margin: 0 auto;">
            {% csrf_token %}
-
+            <br><br>
            <span>¿Cual es el id de la receta?</span>{{form.idReceta}}<br><br>
            <span>¿Cual es el titulo de la receta?</span> {{form.titulo}}<br><br>
-           <span>¿Cual es su descripción?</span> {{form.descripcion}}<br><br>
+           <span>¿Cual es su descripción?</span> <br><br>{{form.descripcion}}<br><br>
            <span>¿Que categoria es?</span>  {{form.categoria}}<br><br>
            <span>¿Cuales son sus ingredientes?</span>  {{form.ingredientes}}<br><br>
            <span>¿Quien es el creador?(escribe su correo)</span>  {{form.creador}}<br><br>
-           <span>¿Deseas agregar una opinion?</span>  {{form.opiniones}}<br><br>
+           <span>¿Deseas agregar una opinion?</span> <br><br> {{form.opiniones}}<br><br>
            <span>¿Como la calificarias?</span>  {{form.calificacion}}<br><br>
            <input type="submit" class="submit" value="CREAR RECETA">
          </form>

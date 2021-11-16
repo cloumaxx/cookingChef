@@ -1,13 +1,10 @@
 from django.db import models
 from django.db import connection
 
-import datetime
 
-from django.forms import forms
-from django.utils import timezone
 def calcularCodigoComentario():
     with connection.cursor() as cursor:
-        cursor.execute('SELECT  MAX("idComentarioAux") \n FROM public.polls_comentarios;')
+        cursor.execute('SELECT  MAX("idComentario") \n FROM public.polls_comentarios;')
         row = cursor.fetchone()
     aux = str(row)
     num = int(aux[2])
@@ -17,10 +14,9 @@ def calcularCodigoComentario():
 
 
 class Comentarios(models.Model):
-    aux = '1'  # str(calcularCodigoIngre())
+    aux = str(calcularCodigoComentario())
     CodigoReceta = [(aux, aux)]
-    idComentario = models.AutoField(primary_key=True)
-    idComentarioAux=models.CharField('Autor del comentario', max_length=100, choices=CodigoReceta)
+    idComentario = models.CharField('Autor del comentario', max_length=100, choices=CodigoReceta)
     auto = models.CharField('Autor del comentario', max_length=100, null=False, blank=False)
     contenido = models.CharField('Comentario', max_length=600, null=False, blank=False)
     idDestino = models.CharField('Id receta', max_length=225, null=False, blank=False)
@@ -36,7 +32,6 @@ def calcularCodigoReceta():
     final = num + 1
 
     return final
-
 
 
 def calcularCodigoIngre():
@@ -110,6 +105,7 @@ class Receta(models.Model):
 
     def __str__(self):
         return "{}".format(self.titulo)
+
 
 # aux
 class Usuario(models.Model):
