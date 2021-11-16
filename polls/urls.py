@@ -10,5 +10,8 @@ urlpatterns = [
     path('PantallaBusqueda/', views.PantallaBusqueda, name='PantallaBusqueda'),
     path('pantallaRegistroReceta/', views.pantallaRegistroReceta, name='pantallaRegistroReceta'),
     path('pantallaRegistroUsuario/', views.pantallaRegistroUsuario, name='pantallaRegistroUsuario'),
-    path('PantallaRegistroIngrediente/', views.PantallaRegistroIngrediente, name='PantallaRegistroIngrediente')
+    path('PantallaRegistroIngrediente/', views.PantallaRegistroIngrediente, name='PantallaRegistroIngrediente'),
+    path('pantallaRegistroComentario/',views.pantallaRegistroComentario,name='pantallaRegistroComentario'),
+    path('pantallaVerRecetas/',views.pantallaVerRecetas,name='pantallaVerRecetas'),
+    path('pantallaVerIngredientes/',views.pantallaVerIngredientes,name='pantallaVerIngredientes')
 ]

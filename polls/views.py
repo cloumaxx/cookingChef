@@ -1,8 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template import loader
-
-from .forms import UsuarioForm, IngredienteForm, RecetaForm
+from django.db.models import Q
+from .forms import UsuarioForm, IngredienteForm, RecetaForm, ComentarioForm
 from .models import Receta, Ingrediente, Usuario
 
 
@@ -15,9 +15,40 @@ def PantallaInicial(request):
 
 
 def PantallaBusqueda(request):
-    template = loader.get_template('polls/templateBusqueda.html')
-    context = {
+    queryset = request.GET.get("busqueda")
+    receta = Receta.objects.all()
+    if queryset:
+        receta = Receta.objects.filter(
+            Q(titulo__icontains=queryset)
+        ).distinct()
+    return render(request, 'polls/templateBusqueda.html', {'Receta': receta})
+
+
+def pantallaVerIngredientes(request):
+    ingrediente= Ingrediente.objects.all()
+    contexto = {
+        'ingredientes':ingrediente
     }
+    return render(request,'polls/templateTodosIngredientes.html',contexto)
+
+
+def pantallaVerRecetas(request):
+    receta = Receta.objects.all()
+    contexto = {
+        'recetas': receta
+    }
+    return render(request, 'polls/templateTodasRecetas.html', contexto)
+
+
+def pantallaRegistroComentario(request):
+    if request.method == 'POST':
+        form = ComentarioForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('Pantalla Principal')
+    else:
+        form = ComentarioForm()
+    return render(request, 'polls/templeateCrearComentario.html', {'form': form})
     return HttpResponse(template.render(context, request))
 
 

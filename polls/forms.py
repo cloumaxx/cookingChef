@@ -1,6 +1,32 @@
 from django import forms
-from polls.models import Usuario, Ingrediente, Receta
+from polls.models import Usuario, Ingrediente, Receta, Comentarios
 
+
+class ComentarioForm(forms.ModelForm):
+    class Meta:
+        model = Comentarios
+        fields =[
+            'idComentarioAux',
+            'auto',
+            'contenido',
+            'idDestino',
+            'fechaCreacion',
+        ]
+        labels = {
+            'idComentarioAux':'IDComentarioAux',
+            'auto':'Autor',
+            'contenido':'Contenido',
+            'idDestino':'IDDestino',
+            'fechaCreacion':'FechaCreacion',
+
+        }
+        widgets = {
+            'idComentarioAux': forms.Select(attrs={'class': 'form-control'}),
+            'auto': forms.TextInput(attrs={'class': 'form-control'}),
+            'contenido':forms.Textarea(attrs={'class': 'form-control','size':'100'}),
+            'idDestino':forms.TextInput(attrs={'class': 'form-control'}),
+            'fechaCreacion':forms.DateTimeInput(attrs={'class': 'form-control','type': 'date',}),
+        }
 
 class IngredienteForm(forms.ModelForm):
     class Meta:

@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recetas</title>
+</head>
+<body>
+
+    		<table border="1" style="text-align:center; margin: 0 auto;">
+
+        <thead>
+        <caption>Recetas</caption>
+            <tr>
+                <td>idReceta</td>
+                <td>titulo</td>
+                <td>descripcion</td>
+                <td>categoria</td>
+                <td>ingredientes</td>
+                <td>creador</td>
+                <td>opiniones</td>
+                <td>calificacion</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% if recetas %}
+            {% for receta in recetas %}
+            <tr>
+                <td>{{receta.idReceta}}</td>
+                <td>{{receta.titulo}}</td>
+                <td>{{receta.descripcion}}</td>
+                <td>{{receta.categoria}}</td>
+                <td>{{receta.ingredientes}}</td>
+                <td>{{receta.creador}}</td>
+                <td>{{receta.opiniones}}</td>
+                <td>{{receta.calificacion}}</td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <h1>No hay recetas registradas</h1>
+            {%endif%}
+        </tbody>
+    </table>
+
+</body>
+</html>

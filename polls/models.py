@@ -5,10 +5,22 @@ import datetime
 
 from django.forms import forms
 from django.utils import timezone
+def calcularCodigoComentario():
+    with connection.cursor() as cursor:
+        cursor.execute('SELECT  MAX("idComentarioAux") \n FROM public.polls_comentarios;')
+        row = cursor.fetchone()
+    aux = str(row)
+    num = int(aux[2])
+    final = num + 1
+
+    return final
 
 
 class Comentarios(models.Model):
+    aux = '1'  # str(calcularCodigoIngre())
+    CodigoReceta = [(aux, aux)]
     idComentario = models.AutoField(primary_key=True)
+    idComentarioAux=models.CharField('Autor del comentario', max_length=100, choices=CodigoReceta)
     auto = models.CharField('Autor del comentario', max_length=100, null=False, blank=False)
     contenido = models.CharField('Comentario', max_length=600, null=False, blank=False)
     idDestino = models.CharField('Id receta', max_length=225, null=False, blank=False)
@@ -39,7 +51,7 @@ def calcularCodigoIngre():
 
 
 class Ingrediente(models.Model):
-    aux =str(calcularCodigoIngre())
+    aux = str(calcularCodigoIngre())
     CodigoReceta = [(aux, aux)]
     tipoComida = [('Lacteo', 'Lacteo'),
                   ('Cereales', 'Cereales'),
@@ -76,7 +88,7 @@ def calcularCodigoUsua():
 
 
 class Receta(models.Model):
-    aux = '1'  # str(calcularCodigoReceta())
+    aux = str(calcularCodigoReceta())
     CodigoReceta = [(aux, aux)]
     calificaciones = [(1, 1), (2, 2), (3, 3), (4, 4), (5, 5)]
     categorias = [
