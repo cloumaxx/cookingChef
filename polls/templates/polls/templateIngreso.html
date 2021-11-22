@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ingreso a la pagina</title>
+</head>
+<body>
+   <div class="container">
+     <div class="login-container">
+       <div class="register">
+         <h2 style="text-align:center; margin: 0 auto;">Bienvenido al CookingChef </h2>
+
+          <form method="post" style="text-align:center; margin: 0 auto;" action="", enctype="multipart/form-data">
+              <h3>Ingresa por favor tu correo y contraseña</h3>
+           {% csrf_token %}
+            <!--  {{form.as_p}}-->
+              <br><br>
+           <span>¿Escribe tu correo?</span> {{form.email}} <br><br>
+
+           <span>¿Cual es tu contraseña</span>  {{form.clave}} <br><br>
+           <button type="submit">ingresar</button>
+              <br><br><br>
+         </form>
+
+       </div>
+         <div style="text-align:center;" >
+             <form method="nuevo" action="">
+                 <button type="submit" style="text-align:center;"    >
+
+                        <a href="/polls/pantallaRegistroUsuario/">Registrar</a>
+
+                     </button>
+             </form>
+         </div>
+
+     </div>
+   </div>
+</body>
+</html>

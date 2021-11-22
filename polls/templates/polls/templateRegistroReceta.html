@@ -12,7 +12,7 @@
      <div class="login-container">
        <div class="register">
          <h2 style="text-align:center; margin: 0 auto;">Bienvendo al Registro de la receta</h2>
-         <form method="post" style="text-align:center; margin: 0 auto;">
+         <form method="post" style="text-align:center; margin: 0 auto;" action="", enctype="multipart/form-data">
            {% csrf_token %}
             <br><br>
            <span>¿Cual es el id de la receta?</span>{{form.idReceta}}<br><br>
@@ -23,6 +23,8 @@
            <span>¿Quien es el creador?(escribe su correo)</span>  {{form.creador}}<br><br>
            <span>¿Deseas agregar una opinion?</span> <br><br> {{form.opiniones}}<br><br>
            <span>¿Como la calificarias?</span>  {{form.calificacion}}<br><br>
+           <span>¿Quieres agregar una imagen?</span><br>{{form.imagen}}<br><br>
+
            <input type="submit" class="submit" value="CREAR RECETA">
          </form>
        </div>

@@ -21,6 +21,7 @@
                 <td>creador</td>
                 <td>opiniones</td>
                 <td>calificacion</td>
+                <td>imagen</td>
             </tr>
         </thead>
         <tbody>
@@ -35,6 +36,7 @@
                 <td>{{receta.creador}}</td>
                 <td>{{receta.opiniones}}</td>
                 <td>{{receta.calificacion}}</td>
+                <td><img class="img-responsive" src=/media/{{receta.imagen}} alt="" width="200" height="100"></td>
             </tr>
             {% endfor %}
             {% else %}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ingrediente</title>
+</head>
+<body>
+<div style="text-align:center">
+   {% if ingredientes %}
+        {% for ingrediente in ingredientes %}
+            {% if ingrediente.idIngrediente == '1' %}
+                <br><br>
+                <span><b> Nombre: </b> </span>{{ingrediente.nombre}}<br><br>
+                <span><b>descripcion</b> </span> {{ingrediente.descripcion}}   <br><br>
+                <span><b>ZonaOrigen:</b></span>  <br>{{ingrediente.ZonaOrigen}}<br>
+                <span><b>Clasificacion:</b></span>   <br>{{ingrediente.Clasificacion}}<br>
+                <span><b>Foto del ingrediente</b></span><br> <img class="img-responsive" src=/media/{{usuario.imagen}} alt="" width="200" height="100"><br><br>
+
+            {%endif%}
+
+        {% endfor %}
+    {% else %}
+        <h1>usuario no encontrado</h1>
+    {%endif%}
+</div>
+
+
+
+</body>
+</html>

@@ -9,7 +9,7 @@
      <div class="login-container">
        <div class="register" >
          <h2 style="text-align:center; margin: 0 auto;">Bienvendo al Registro de un ingrediente</h2>
-          <form method="post" style="text-align:center; margin: 0 auto;">
+          <form method="post" style="text-align:center; margin: 0 auto;", enctype="multipart/form-data">
            {% csrf_token %}
             <!--  {{form.as_p}}-->
               <br><br>
@@ -18,6 +18,7 @@
            <span>¿Cual es su descripción?</span><br><br>  {{form.descripcion}}<br><br>
            <span>¿De donde viene?</span>  {{form.zonaOrigen}} <br><br>
            <span>¿Como la clasificarias?</span>  {{form.clasificacion}}<br><br>
+           <span>¿Quieres agregar una imagen?</span><br>{{form.imagen}}<br><br>
            <input type="submit" class="submit" value="CREAR INGREDIENTE">
          </form>
        </div>

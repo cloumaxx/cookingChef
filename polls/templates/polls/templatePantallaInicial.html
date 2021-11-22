@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pantalla Principal</title>
+</head>
+<body><br><br>
+        </div>
+         <div style="text-align:center;" >
+             <form method="nuevo" action="">
+                 <button type="submit" style="text-align:center;"    >
+                        <a href="/polls/pantallaRegistroReceta/">Crear Receta </a>
+                 </button>
+                 &nbsp;&nbsp;&nbsp;&nbsp;
+                 <button type="submit" style="text-align:center;"    >
+                        <a href="/polls/PantallaRegistroIngrediente/">Crear Ingrediente</a>
+                 </button>
+                 <br><br>
+
+                 <button type="submit" style="text-align:center;"    >
+                        <a href="/polls/pantallaVerRecetas/">Ver todas las recetas </a>
+                 </button>
+                 &nbsp;&nbsp;&nbsp;&nbsp;
+                 <button type="submit" style="text-align:center;"    >
+                        <a href="/polls/pantallaVerIngredientes/">Ver todos los ingredientes</a>
+                 </button>
+                 <br><br>
+                 </button>
+                 <button type="submit" style="text-align:center;"    >
+                        <a href="pantallaBusqueda">Realizar busqueda</a>
+                 </button>
+                 <br>
+             </form>
+         </div>
+        <br><br>
+    		<table border="1" style="text-align:center; margin: 0 auto;">
+        <h1 style="text-align:center; margin: 0 auto;">Recetas</h1>
+                <br>
+        <thead>
+            <tr>
+                <td>titulo</td>
+                <td>ingredientes</td>
+                <td>calificacion</td>
+                <td>imagen</td>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% if recetas %}
+            {% for receta in recetas  %}
+            <tr>
+                <td>
+                    <ul>
+                        <li><a href="/polls/PantallaIngrediente/">{{receta.titulo}}</a></li>
+                    </ul>
+                   </td>
+                <td>{{receta.ingredientes}}</td>
+                <td>{{receta.calificacion}}</td>
+                <td><img class="img-responsive" src=/media/{{receta.imagen}} alt="" width="200" height="100"></td>
+            </tr>
+
+            {% endfor %}
+            {% else %}
+            <h1>No hay recetas registradas</h1>
+            {%endif%}
+        </tbody>
+    </table>
+
+</body>
+</html>

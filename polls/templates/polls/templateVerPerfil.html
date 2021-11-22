@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil usuario</title>
+</head>
+<body>
+<div style="text-align:center">
+   {% if usuarios %}
+        {% for usuario in usuarios %}
+            {% if usuario.apodo == 'cloumax' %}
+                <br><br>
+                <span> <b> Nombre: </b> </span>{{usuario.nombre}}  {{usuario.apellido}}<br><br>
+                <span><b>Apodo</b> </span> {{usuario.apodo}}   <br><br>
+                <span><b>Cedula:</b></span>  <br>{{usuario.cedula}}<br>
+                <span><b>Nacio:</b></span>   <br>{{usuario.fechaNacido}}<br>
+                <span><b>Correo: </b></span>  <br>{{usuario.opiniones}}<br>
+                <span><b>Foto de perfil</b></span><br> <img class="img-responsive" src=/media/{{usuario.imagen}} alt="" width="200" height="100"><br><br>
+
+            {%endif%}
+
+        {% endfor %}
+    {% else %}
+        <h1>usuario no encontrado</h1>
+    {%endif%}
+</div>
+
+
+
+</body>
+</html>

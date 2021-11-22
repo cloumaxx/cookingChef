@@ -1,17 +1,23 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template import loader
+
 from django.db.models import Q
-from .forms import UsuarioForm, IngredienteForm, RecetaForm, ComentarioForm
+from .forms import UsuarioForm, IngredienteForm, RecetaForm, ComentarioForm, UsuarioIngrForm
 from .models import Receta, Ingrediente, Usuario
 
 
 def PantallaInicial(request):
-    template = loader.get_template('polls/index.html')
+    receta = Receta.objects.all()
+    contexto = {
+        'recetas': receta
+    }
+    return render(request, 'polls/templatePantallaInicial.html', contexto)
+    """template = loader.get_template('polls/index.html')
     context = {
 
     }
-    return HttpResponse(template.render(context, request))
+    return HttpResponse(template.render(context, request))"""
 
 
 def PantallaBusqueda(request):
@@ -25,11 +31,11 @@ def PantallaBusqueda(request):
 
 
 def pantallaVerIngredientes(request):
-    ingrediente= Ingrediente.objects.all()
+    ingrediente = Ingrediente.objects.all()
     contexto = {
-        'ingredientes':ingrediente
+        'ingredientes': ingrediente
     }
-    return render(request,'polls/templateTodosIngredientes.html',contexto)
+    return render(request, 'polls/templateTodosIngredientes.html', contexto)
 
 
 def pantallaVerRecetas(request):
@@ -52,12 +58,27 @@ def pantallaRegistroComentario(request):
     return HttpResponse(template.render(context, request))
 
 
+def pantallaIngreso(request):
+    if request.method == 'POST':
+        form = UsuarioIngrForm(request.POST)
+        if form.is_valid():
+            form.clean_Ingreso()
+            print('entro')
+        return redirect('Pantalla Principal')
+    elif request.method == 'NUEVO':
+        return redirect(request, 'polls/templateRegistroUsuario.html')
+    else:
+        form = UsuarioIngrForm()
+    return render(request, 'polls/templateIngreso.html', {'form': form})
+    return HttpResponse(template.render(context, request))
+
+
 def pantallaRegistroUsuario(request):
     if request.method == 'POST':
-        form = UsuarioForm(request.POST)
+        form = UsuarioForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-        return redirect('Pantalla Principal')
+        return redirect('pantallaIngreso')
     else:
         form = UsuarioForm()
     return render(request, 'polls/templateRegistroUsuario.html', {'form': form})
@@ -66,22 +87,37 @@ def pantallaRegistroUsuario(request):
 
 def PantallaRegistroIngrediente(request):
     if request.method == 'POST':
-        form = IngredienteForm(request.POST)
+        form = IngredienteForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-        return redirect('Pantalla Principal')
+        return redirect('PantallaInicial')
     else:
         form = IngredienteForm()
     return render(request, 'polls/templateRegistroIngrediente.html', {'form': form})
     return HttpResponse(template.render(context, request))
 
 
+def pantallaBusqueda(request):
+    buscar = request.GET.get("busqueda")
+    recetas = Receta.objects.all()
+    if buscar:
+        recetas = Receta.objects.filter(
+            Q(titulo__icontains=buscar) |
+            Q(ingredientes__icontains=buscar) |
+            Q(creador__icontains=buscar) |
+            Q(calificacion__icontains=buscar) |
+            Q(descripcion__icontains=buscar)
+        ).distinct()
+
+    return render(request, 'polls/templateTodasRecetas.html',{'recetas':recetas})
+
+
 def pantallaRegistroReceta(request):
     if request.method == 'POST':
-        form = RecetaForm(request.POST)
+        form = RecetaForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-        return redirect('Pantalla Principal')
+        return redirect('PantallaInicial')
     else:
         form = RecetaForm()
     return render(request, 'polls/templateRegistroReceta.html', {'form': form})
@@ -89,8 +125,24 @@ def pantallaRegistroReceta(request):
 
 
 def PantallaUsuario(request):
-    return HttpResponse("esta pantalla se encargara de mostrar el perfil de un usuario")
+    usuario = Usuario.objects.all()
+    contexto = {
+        'usuarios': usuario
+    }
+    return render(request, 'polls/templateVerPerfil.html', contexto)
+
+
+def PantallaIngrediente(request):
+    ingrediente = Ingrediente.objects.all()
+    contexto = {
+        'ingredientes': ingrediente
+    }
+    return render(request, 'polls/templateVerIngrediente.html', contexto)
 
 
 def PantallaReceta(request):
-    return HttpResponse("esta pantalla se encargara de mostrar la informacion referente a una receta")
+    receta = Receta.objects.all()
+    contexto = {
+        'recetas': receta
+    }
+    return render(request, 'polls/templateReceta.html', contexto)
