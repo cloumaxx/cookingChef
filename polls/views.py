@@ -8,7 +8,7 @@ from .models import Receta, Ingrediente, Usuario
 
 
 def PantallaInicial(request):
-    receta = Receta.objects.all()
+    receta = Receta.objects.all().order_by('calificacion')
     contexto = {
         'recetas': receta
     }
@@ -18,16 +18,6 @@ def PantallaInicial(request):
 
     }
     return HttpResponse(template.render(context, request))"""
-
-
-def PantallaBusqueda(request):
-    queryset = request.GET.get("busqueda")
-    receta = Receta.objects.all()
-    if queryset:
-        receta = Receta.objects.filter(
-            Q(titulo__icontains=queryset)
-        ).distinct()
-    return render(request, 'polls/templateBusqueda.html', {'Receta': receta})
 
 
 def pantallaVerIngredientes(request):
@@ -90,7 +80,7 @@ def PantallaRegistroIngrediente(request):
         form = IngredienteForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-        return redirect('PantallaInicial')
+        return redirect('Pantalla Principal')
     else:
         form = IngredienteForm()
     return render(request, 'polls/templateRegistroIngrediente.html', {'form': form})
@@ -98,18 +88,44 @@ def PantallaRegistroIngrediente(request):
 
 
 def pantallaBusqueda(request):
-    buscar = request.GET.get("busqueda")
+    buscarRec = request.GET.get("busquedaReceta")
+    buscarUsua = request.GET.get('busquedaUsuario')
+    buscarIngr = request.GET.get('busquedaIngrediente')
     recetas = Receta.objects.all()
-    if buscar:
+    ingredientes = Ingrediente.objects.all()
+    usuarios = Usuario.objects.all()
+    if buscarRec:
         recetas = Receta.objects.filter(
-            Q(titulo__icontains=buscar) |
-            Q(ingredientes__icontains=buscar) |
-            Q(creador__icontains=buscar) |
-            Q(calificacion__icontains=buscar) |
-            Q(descripcion__icontains=buscar)
+            Q(titulo__icontains=buscarRec) |
+            Q(ingredientes__icontains=buscarRec) |
+            Q(creador__icontains=buscarRec) |
+            Q(calificacion__icontains=buscarRec) |
+            Q(descripcion__icontains=buscarRec)
         ).distinct()
+        return render(request, 'polls/indicesBusquedas/templateIndiceBusquedaReceta.html', {'recetas': recetas})
+    elif buscarIngr:
+        ingredientes = Ingrediente.objects.filter(
+            Q(nombre__icontains=buscarIngr) |
+            Q(descripcion__icontains=buscarIngr) |
+            Q(zonaOrigen__icontains=buscarIngr) |
+            Q(clasificacion__icontains=buscarIngr)
+        ).distinct()
+        return render(request, 'polls/indicesBusquedas/templateIndiceBusquedaIngrediente.html',
+                      {'ingredientes': ingredientes})
+    elif buscarUsua:
+        usuarios = Usuario.objects.filter(
+            Q(nombre__icontains=buscarUsua) |
+            Q(apellido__icontains=buscarUsua) |
+            Q(apodo__icontains=buscarUsua) |
+            Q(cedula__icontains=buscarUsua) |
+            Q(email__icontains=buscarUsua)
+        ).distinct()
+        return  render(request,'polls/indicesBusquedas/templateIndiceBusquedaUsuario.html',{'usuarios':usuarios})
+    return render(request, 'polls/templateBusqueda.html', {'usuarios': usuarios})
 
-    return render(request, 'polls/templateTodasRecetas.html',{'recetas':recetas})
+
+def pantallaIndiceReceta(request, recetas):
+    return render(request, 'polls/templateBusqueda.html', {'recetas': recetas})
 
 
 def pantallaRegistroReceta(request):
@@ -117,7 +133,7 @@ def pantallaRegistroReceta(request):
         form = RecetaForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-        return redirect('PantallaInicial')
+        return redirect('Pantalla Principal')
     else:
         form = RecetaForm()
     return render(request, 'polls/templateRegistroReceta.html', {'form': form})

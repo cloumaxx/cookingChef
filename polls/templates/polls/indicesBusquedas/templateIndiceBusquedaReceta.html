@@ -1,19 +1,16 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Recetas</title>
+    <title>Resultados</title>
 </head>
 <body>
-
-    		<table border="1" style="text-align:center; margin: 0 auto;">
+	<table border="1" style="text-align:center; margin: 0 auto;">
         <h1 style="text-align:center; margin: 0 auto;">Recetas</h1>
                 <br>
         <thead>
 
             <tr>
-                <td>idReceta</td>
                 <td>titulo</td>
                 <td>descripcion</td>
                 <td>Como se prepara</td>
@@ -29,7 +26,6 @@
             {% if recetas %}
             {% for receta in recetas %}
             <tr>
-                <td>{{receta.idReceta}}</td>
                 <td>{{receta.titulo}}</td>
                 <td>{{receta.descripcion}}</td>
                 <td>{{receta.pasosPre}}</td>

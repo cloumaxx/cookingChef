@@ -5,10 +5,30 @@
     <title>Busqueda</title>
 </head>
 <body>
+    <br>
     {% block buscador %}
-    <form class="d-done d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="GET">
+    <form style="text-align:center; margin: 0 auto;" class="d-done d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="GET">
         <div class="input-group">
-            <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar Receta" name="busqueda" value="">
+            <p>Ingresa la receta que deseas buscar</p>
+            <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar Receta" name="busquedaReceta" value="">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">
+                    <i class="icon icon-search"> buscar</i>
+                </button>
+            </div>
+        </div>
+        <div class="input-group">
+             <p>Ingresa el ingrediente que deseas buscar</p>
+            <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar Ingrediente" name="busquedaIngrediente" value="">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">
+                    <i class="icon icon-search"> buscar</i>
+                </button>
+            </div>
+        </div>
+         <div class="input-group">
+             <p>Ingresa el usuario que deseas buscar</p>
+            <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar Usuario" name="busquedaUsuario" value="">
             <div class="input-group-append">
                 <button class="btn btn-primary" type="submit">
                     <i class="icon icon-search"> buscar</i>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados</title>
+</head>
+<body>
+	<table border="1" style="text-align:center; margin: 0 auto;">
+        <h1 style="text-align:center; margin: 0 auto;">Recetas</h1>
+                <br>
+        <thead>
+
+            <tr>
+                <td>nombre</td>
+                <td>apodo</td>
+                <td>cedula</td>
+                <td>fechaNacido</td>
+                <td>email</td>
+                <td>imagen</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% if usuarios %}
+            {% for usuario in usuarios %}
+            <tr>
+                <td>{{usuario.nombre}}  {{usuario.apellido}}</td>
+                <td>{{usuario.apodo}}</td>
+                <td>{{usuario.cedula}}</td>
+                <td>{{usuario.fechaNacido}}</td>
+                <td>{{usuario.email}}</td>
+                <td><img class="img-responsive" src=/media/{{receta.imagen}} alt="" width="200" height="100"></td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <h1>No hay recetas registradas</h1>
+            {%endif%}
+        </tbody>
+    </table>
+
+</body>
+</html>

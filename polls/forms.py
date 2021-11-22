@@ -4,7 +4,6 @@ from datetime import *
 from django.db import connection
 
 
-
 class ComentarioForm(forms.ModelForm):
     class Meta:
         model = Comentarios
@@ -30,7 +29,6 @@ class ComentarioForm(forms.ModelForm):
             'idDestino': forms.TextInput(attrs={'class': 'form-control', 'size': '100'}),
             'fechaCreacion': forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'date'}),
         }
-
 
 
 class IngredienteForm(forms.ModelForm):
@@ -77,13 +75,15 @@ class RecetaForm(forms.ModelForm):
             'creador',
             'opiniones',
             'calificacion',
-            'imagen'
+            'imagen',
+            'pasosPre'
 
         ]
         labels = {
             'idReceta': 'IDReceta',
             'titulo': 'Titulo',
             'descripcion': 'Descripcion',
+            'pasosPre': 'PasosPre',
             'categoria': 'Categoria',
             'ingredientes': 'Ingredientes',
             'creador': 'Creador',
@@ -99,6 +99,8 @@ class RecetaForm(forms.ModelForm):
             'descripcion': forms.Textarea(attrs={'class': 'form-control',
                                                  'placeholder': 'Ingresa la descripcion de la receta', 'size': '100'}),
             'categoria': forms.Select(attrs={'class': 'form-control'}),
+            'pasosPre': forms.Textarea(attrs={'class': 'form-control',
+                                              'placeholder': 'Ingresa como prepararla', 'size': '100'}),
             'ingredientes': forms.TextInput(attrs={'class': 'form-control',
                                                    'placeholder': 'Ingresa la descripcion de la receta',
                                                    'size': '100'}),
@@ -161,9 +163,9 @@ class UsuarioForm(forms.ModelForm):
     def clean_fechaNacido(self):
         fechaNacido = self.cleaned_data.get('fechaNacido')
 
-        fechaCompara= datetime.now().date()
-        c = abs(fechaCompara-fechaNacido).days
-        result =c /365
+        fechaCompara = datetime.now().date()
+        c = abs(fechaCompara - fechaNacido).days
+        result = c / 365
         if result <= 17:
             raise forms.ValidationError('prueba error')
         return fechaNacido
@@ -190,14 +192,14 @@ class UsuarioIngrForm(forms.ModelForm):
     def clean_Ingreso(self):
         usuarioIngr = self.cleaned_data.get('email')
         clave = self.cleaned_data.get('clave')
-        busquedaUSuario='SELECT  "idUsuario" \nFROM public.polls_usuario \nwhere email=\''+usuarioIngr+'\';'
-        busquedaClave='SELECT  "idUsuario" \nFROM public.polls_usuario \nwhere clave=\''+clave+'\';'
+        busquedaUSuario = 'SELECT  "idUsuario" \nFROM public.polls_usuario \nwhere email=\'' + usuarioIngr + '\';'
+        busquedaClave = 'SELECT  "idUsuario" \nFROM public.polls_usuario \nwhere clave=\'' + clave + '\';'
         with connection.cursor() as cursor:
             cursor.execute(busquedaUSuario)
-            idUsuario= cursor.fetchone()
+            idUsuario = cursor.fetchone()
         with connection.cursor() as cursor:
             cursor.execute(busquedaClave)
-            idClave=cursor.fetchone()
+            idClave = cursor.fetchone()
 
         if idClave != idUsuario:
             raise forms.ValidationError('prueba error')

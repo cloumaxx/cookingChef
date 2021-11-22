@@ -28,7 +28,7 @@
                  <br><br>
                  </button>
                  <button type="submit" style="text-align:center;"    >
-                        <a href="pantallaBusqueda">Realizar busqueda</a>
+                        <a href="/polls/pantallaBusqueda/">Realizar busqueda</a>
                  </button>
                  <br>
              </form>
@@ -51,9 +51,7 @@
             {% for receta in recetas  %}
             <tr>
                 <td>
-                    <ul>
-                        <li><a href="/polls/PantallaIngrediente/">{{receta.titulo}}</a></li>
-                    </ul>
+                    {{receta.titulo}}
                    </td>
                 <td>{{receta.ingredientes}}</td>
                 <td>{{receta.calificacion}}</td>

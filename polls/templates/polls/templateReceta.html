@@ -9,7 +9,7 @@
 <div style="text-align:center">
      {% if recetas %}
         {% for receta in recetas %}
-            {% if receta.titulo == 'tamal' %}
+
     <br><br>
                 <span> <b> Titulo: </b> </span>{{receta.titulo}}<br><br>
                 <span><b>Descripcion</b> </span> {{receta.descripcion}}   <br><br>
@@ -20,7 +20,7 @@
                 <span><b>Calificacion </b></span>  <br>{{receta.calificacion}}<br>
                 <span><b>Imagen</b></span><br> <img class="img-responsive" src=/media/{{receta.imagen}} alt="" width="200" height="100"><br><br>
 
-            {%endif%}
+
 
         {% endfor %}
     {% else %}

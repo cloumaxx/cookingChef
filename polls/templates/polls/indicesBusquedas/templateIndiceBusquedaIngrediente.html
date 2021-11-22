@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados</title>
+</head>
+<body>
+	<table border="1" style="text-align:center; margin: 0 auto;">
+        <h1 style="text-align:center; margin: 0 auto;">Ingrediente</h1>
+                <br>
+        <thead>
+
+            <tr>
+                <td>nombre</td>
+                <td>descripcion</td>
+                <td>Origen</td>
+                <td>clasificacion</td>
+                <td>imagen</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% if ingredientes %}
+            {% for ingrediente in ingredientes %}
+            <tr>
+                <td>{{ingrediente.nombre}}</td>
+                <td>{{ingrediente.descripcion}}</td>
+                <td>{{ingrediente.zonaOrigen}}</td>
+                <td>{{ingrediente.clasificacion}}</td>
+                <td><img class="img-responsive" src=/media/{{ingrediente.imagen}} alt="" width="200" height="100"></td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <h1>No hay ingredientes registrados</h1>
+            {%endif%}
+        </tbody>
+    </table>
+
+</body>
+</html>

@@ -90,11 +90,15 @@ class Receta(models.Model):
     categorias = [
         ('marina', 'marina'),
         ('postres', 'postres'),
-        ('tipico', 'tipico')
+        ('tipico', 'tipico'),
+        ('saludable','saludable'),
+        ('sopas','sopas'),
+
     ]
     idReceta = models.CharField('Id de la receta', max_length=100, null=False, choices=CodigoReceta)
     titulo = models.CharField('Titulo de la receta', max_length=225, null=False, blank=False)
     descripcion = models.CharField('Descripcion de la receta', max_length=500, null=False, blank=False)
+    pasosPre = models.CharField('Como se prepara',max_length=10000, null=True, blank=True)
     categoria = models.CharField('Categoria de la receta', max_length=225, choices=categorias)
     ingredientes = models.CharField('Ingredientes de la receta', max_length=225, null=False, blank=False)
     creador = models.EmailField('Creador de la receta', max_length=225, null=False, blank=False)
