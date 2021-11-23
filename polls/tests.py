@@ -3,6 +3,15 @@ import models
 from django.core.management import *
 from cookingFinal import settings
 from django.test import TestCase
+import os
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
+
+import django
+
+django.setup()
+
+from django.core.management import call_command
 
 
 # Create your tests here.

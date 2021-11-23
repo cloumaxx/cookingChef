@@ -20,7 +20,6 @@ def calcularCodigoReceta():
     aux = str(row)
     num = int(aux[2])
     final = num + 1
-
     return final
 
 

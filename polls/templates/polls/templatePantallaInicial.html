@@ -48,19 +48,17 @@
         <tbody>
 
             {% if recetas %}
-            {% for receta in recetas  %}
-            <tr>
-                <td>
-                    {{receta.titulo}}
-                   </td>
-                <td>{{receta.ingredientes}}</td>
-                <td>{{receta.calificacion}}</td>
-                <td><img class="img-responsive" src=/media/{{receta.imagen}} alt="" width="200" height="100"></td>
-            </tr>
+                {% for receta in recetas  %}
+                <tr>
+                    <td>{{receta.titulo}}</td>
+                    <td>{{receta.ingredientes}}</td>
+                    <td>{{receta.calificacion}}</td>
+                    <td><img class="img-responsive" src=/media/{{receta.imagen}} alt="" width="200" height="100"></td>
+                </tr>
 
-            {% endfor %}
+                {% endfor %}
             {% else %}
-            <h1>No hay recetas registradas</h1>
+                <h1>No hay recetas registradas</h1>
             {%endif%}
         </tbody>
     </table>

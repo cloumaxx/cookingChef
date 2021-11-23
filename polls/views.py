@@ -8,16 +8,11 @@ from .models import Receta, Ingrediente, Usuario
 
 
 def PantallaInicial(request):
-    receta = Receta.objects.all().order_by('calificacion')
+    receta = Receta.objects.all()
     contexto = {
         'recetas': receta
     }
     return render(request, 'polls/templatePantallaInicial.html', contexto)
-    """template = loader.get_template('polls/index.html')
-    context = {
-
-    }
-    return HttpResponse(template.render(context, request))"""
 
 
 def pantallaVerIngredientes(request):
@@ -28,24 +23,13 @@ def pantallaVerIngredientes(request):
     return render(request, 'polls/templateTodosIngredientes.html', contexto)
 
 
+# esta pantalla muestra el listado de pantallas registradas
 def pantallaVerRecetas(request):
     receta = Receta.objects.all()
     contexto = {
         'recetas': receta
     }
     return render(request, 'polls/templateTodasRecetas.html', contexto)
-
-
-def pantallaRegistroComentario(request):
-    if request.method == 'POST':
-        form = ComentarioForm(request.POST)
-        if form.is_valid():
-            form.save()
-        return redirect('Pantalla Principal')
-    else:
-        form = ComentarioForm()
-    return render(request, 'polls/templeateCrearComentario.html', {'form': form})
-    return HttpResponse(template.render(context, request))
 
 
 def pantallaIngreso(request):
@@ -60,30 +44,6 @@ def pantallaIngreso(request):
     else:
         form = UsuarioIngrForm()
     return render(request, 'polls/templateIngreso.html', {'form': form})
-    return HttpResponse(template.render(context, request))
-
-
-def pantallaRegistroUsuario(request):
-    if request.method == 'POST':
-        form = UsuarioForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-        return redirect('pantallaIngreso')
-    else:
-        form = UsuarioForm()
-    return render(request, 'polls/templateRegistroUsuario.html', {'form': form})
-    return HttpResponse(template.render(context, request))
-
-
-def PantallaRegistroIngrediente(request):
-    if request.method == 'POST':
-        form = IngredienteForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-        return redirect('Pantalla Principal')
-    else:
-        form = IngredienteForm()
-    return render(request, 'polls/templateRegistroIngrediente.html', {'form': form})
     return HttpResponse(template.render(context, request))
 
 
@@ -120,12 +80,49 @@ def pantallaBusqueda(request):
             Q(cedula__icontains=buscarUsua) |
             Q(email__icontains=buscarUsua)
         ).distinct()
-        return  render(request,'polls/indicesBusquedas/templateIndiceBusquedaUsuario.html',{'usuarios':usuarios})
+        return render(request, 'polls/indicesBusquedas/templateIndiceBusquedaUsuario.html', {'usuarios': usuarios})
     return render(request, 'polls/templateBusqueda.html', {'usuarios': usuarios})
 
 
 def pantallaIndiceReceta(request, recetas):
     return render(request, 'polls/templateBusqueda.html', {'recetas': recetas})
+
+
+# esta panatalla es para registrar un comentario
+def pantallaRegistroComentario(request):
+    if request.method == 'POST':
+        form = ComentarioForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('Pantalla Principal')
+    else:
+        form = ComentarioForm()
+    return render(request, 'polls/templeateCrearComentario.html', {'form': form})
+    return HttpResponse(template.render(context, request))
+
+
+def pantallaRegistroUsuario(request):
+    if request.method == 'POST':
+        form = UsuarioForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+        return redirect('pantallaIngreso')
+    else:
+        form = UsuarioForm()
+    return render(request, 'polls/templateRegistroUsuario.html', {'form': form})
+    return HttpResponse(template.render(context, request))
+
+
+def PantallaRegistroIngrediente(request):
+    if request.method == 'POST':
+        form = IngredienteForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+        return redirect('Pantalla Principal')
+    else:
+        form = IngredienteForm()
+    return render(request, 'polls/templateRegistroIngrediente.html', {'form': form})
+    return HttpResponse(template.render(context, request))
 
 
 def pantallaRegistroReceta(request):
